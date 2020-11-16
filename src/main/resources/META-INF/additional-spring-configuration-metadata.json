@@ -1,0 +1,40 @@
+{
+  "groups": [
+    {
+      "name": "mqtt",
+      "type": "ru.aleksx.tempservice.configuration.MqttSettings",
+      "sourceType": "ru.aleksx.tempservice.configuration.MqttSettings"
+    },
+    {
+      "name": "mqtt.broker",
+      "type": "ru.aleksx.tempservice.configuration.MqttSettings$Broker",
+      "sourceType": "ru.aleksx.tempservice.configuration.MqttSettings",
+      "sourceMethod": "getBroker()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "mqtt.broker.host",
+      "type": "java.lang.String",
+      "defaultValue": "localhost",
+      "description": "Description for spring.mqtt.broker.host."
+    },
+    {
+      "name": "mqtt.broker.port",
+      "type": "java.lang.Integer",
+      "defaultValue": 1833,
+      "description": "Description for spring.mqtt.broker.port."
+    },
+    {
+      "name": "mqtt.clientname",
+      "type": "java.lang.String",
+      "defaultValue": "guest",
+      "description": "Description for spring.mqtt.client-name."
+    },
+    {
+      "name": "mqtt.password",
+      "type": "java.lang.String",
+      "defaultValue": "guest",
+      "description": "Description for mqtt.password."
+    }
+  ] }
