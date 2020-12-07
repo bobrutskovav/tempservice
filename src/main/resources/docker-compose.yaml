@@ -1,7 +1,16 @@
 version: '3.5'
 services:
-  cassandra:
-    image: cassandra:latest
+
+  mqtt-broker:
+    image: toke/mosquitto:latest
     ports:
-      - "9042:9042"
-      - "7199:7199"
+      - 1883:1883
+    container_name: "mqtt-broker"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    ports:
+      - 27017:27017

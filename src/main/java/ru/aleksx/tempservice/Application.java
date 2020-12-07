@@ -3,13 +3,12 @@ package ru.aleksx.tempservice;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
+//import org.springframework.integration.annotation.IntegrationComponentScan;
+//import org.springframework.integration.config.EnableIntegration;
 
 @EnableConfigurationProperties
-@EnableCassandraRepositories
 @SpringBootApplication
 public class Application {
 

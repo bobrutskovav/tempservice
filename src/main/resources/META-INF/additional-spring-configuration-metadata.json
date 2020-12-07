@@ -2,13 +2,13 @@
   "groups": [
     {
       "name": "mqtt",
-      "type": "ru.aleksx.tempservice.configuration.MqttSettings",
-      "sourceType": "ru.aleksx.tempservice.configuration.MqttSettings"
+      "type": "ru.aleksx.tempservice.settings.MqttSettings",
+      "sourceType": "ru.aleksx.tempservice.settings.MqttSettings"
     },
     {
       "name": "mqtt.broker",
-      "type": "ru.aleksx.tempservice.configuration.MqttSettings$Broker",
-      "sourceType": "ru.aleksx.tempservice.configuration.MqttSettings",
+      "type": "ru.aleksx.tempservice.settings.MqttSettings$Broker",
+      "sourceType": "ru.aleksx.tempservice.settings.MqttSettings",
       "sourceMethod": "getBroker()"
     }
   ],
@@ -28,13 +28,19 @@
     {
       "name": "mqtt.clientname",
       "type": "java.lang.String",
-      "defaultValue": "guest",
+      "defaultValue": "",
       "description": "Description for spring.mqtt.client-name."
     },
     {
       "name": "mqtt.password",
       "type": "java.lang.String",
-      "defaultValue": "guest",
+      "defaultValue": "",
       "description": "Description for mqtt.password."
+    },
+    {
+      "name": "mqtt.username",
+      "type": "java.lang.String",
+      "defaultValue": "",
+      "description": "Description for mqtt.username."
     }
   ] }

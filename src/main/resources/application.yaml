@@ -1,14 +1,9 @@
 mqtt:
   broker:
     host: "localhost"
-    port: 1833
-  clientname: "server-client"
-  password: "guest"
-
-
-spring:
-  data:
-    cassandra:
-      keyspace-name: "tempService"
-      local-datacenter: "dc1"
-      schema-action: create_if_not_exists
+    port: 1883
+  clientname: "serverclient"
+  username: "server"
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG

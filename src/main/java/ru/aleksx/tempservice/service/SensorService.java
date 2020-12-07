@@ -15,4 +15,8 @@ public interface SensorService {
 
     Optional<SensorInfoDto> getSensorByIp(String ip);
 
+    List<SensorInfoDto> getSensorsByGroupName(String groupName);
+
+    SensorInfoDto addNewSensor(String ip, String sensorGroupId);
+
 }
