@@ -2,6 +2,7 @@ package ru.aleksx.tempservice.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.aleksx.tempservice.controller.dto.SensorInfoDto;
@@ -38,6 +39,7 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
+    @Cacheable(value = "temperatureData")
     public Optional<TemperatureDataDto> getLastTemperature(String sensorId) {
         return temperatureRepository.findFirstBySensorIdOrderByTimeDesc(sensorId)
                 .stream().findFirst()
@@ -45,8 +47,9 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
+    @Cacheable(value = "temperatureData")
     public List<TemperatureDataDto> getLastTemperature(String sensorId, int count) {
-
+        log.info("Get last {} temperature for sensorId {}", count, sensorId);
         PageRequest pageRequest = PageRequest.of(0, count);
         return temperatureRepository.findAllBySensorIdOrderByTimeDesc(sensorId, pageRequest)
                 .stream()
@@ -55,6 +58,7 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
+    @Cacheable(value = "temperatureData")
     public List<TemperatureDataDto> getLastTemperatureForAllSensors(int quantity) {
         PageRequest pageable = PageRequest.of(0, quantity);
         return temperatureRepository.findAllByOrderByTimeDesc(pageable).stream()
@@ -63,6 +67,7 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
+    @Cacheable(value = "temperatureData")
     public List<TemperatureDataDto> getLastTemperatureForGroup(String groupId) {
 
         List<SensorInfoDto> sensors = sensorService.getSensorsByGroupName(groupId);
