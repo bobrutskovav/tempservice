@@ -1,4 +1,4 @@
-package ru.aleksx.tempservice.configuration;
+package ru.aleksx.tempservice.settings;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +35,8 @@ public class MqttSettings {
 
     private String password;
 
+    private String username;
+
     public String getClientName() {
         return clientName;
     }
@@ -57,5 +59,13 @@ public class MqttSettings {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

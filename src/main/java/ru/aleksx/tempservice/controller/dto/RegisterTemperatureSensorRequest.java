@@ -2,12 +2,9 @@ package ru.aleksx.tempservice.controller.dto;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class SensorInfoDto implements Serializable {
+public class RegisterTemperatureSensorRequest {
 
-    private String id;
     private String ip;
     private String groupName;
 }
