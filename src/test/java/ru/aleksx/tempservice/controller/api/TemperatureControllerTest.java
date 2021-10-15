@@ -58,7 +58,7 @@ public class TemperatureControllerTest {
     }
 
     @Test
-    void getTemp() throws Exception {
+    void getTemperature() throws Exception {
 
         String randomSensorUuid = UUID.randomUUID().toString();
 
@@ -81,7 +81,7 @@ public class TemperatureControllerTest {
 
 
     @Test
-    void testGetTempNForSensor() throws Exception {
+    void testGetTemperatureNForSensor() throws Exception {
         String randomSensorUuid = UUID.randomUUID().toString();
 
         TemperatureData temperatureData = new TemperatureData();
@@ -117,7 +117,7 @@ public class TemperatureControllerTest {
 
 
     @Test
-    void testGetTempNForSensorCached() throws Exception {
+    void testGetTemperatureNForSensorCached() throws Exception {
         String randomSensorUuid = UUID.randomUUID().toString();
 
         TemperatureData temperatureData = new TemperatureData();

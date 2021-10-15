@@ -11,6 +11,7 @@ import ru.aleksx.tempservice.messaging.message.TemperatureDataMessage;
 import ru.aleksx.tempservice.model.TemperatureData;
 import ru.aleksx.tempservice.repository.TemperatureRepository;
 
+import javax.cache.annotation.CacheKey;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -39,16 +40,18 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
-    @Cacheable(value = "temperatureData")
-    public Optional<TemperatureDataDto> getLastTemperature(String sensorId) {
+    @Cacheable(value = "temperatureData",key = "#sensorId")
+    public TemperatureDataDto getLastTemperatures(String sensorId) {
+        log.info("Get last temperature for sensorId {}", sensorId);
         return temperatureRepository.findFirstBySensorIdOrderByTimeDesc(sensorId)
                 .stream().findFirst()
-                .map(this::mapToDTO);
+                .map(this::mapToDTO)
+                .orElse(null);
     }
 
     @Override
-    @Cacheable(value = "temperatureData")
-    public List<TemperatureDataDto> getLastTemperature(String sensorId, int count) {
+    @Cacheable(value = "temperatureDataList", key = "#sensorId")
+    public List<TemperatureDataDto> getLastTemperatures(String sensorId, int count) {
         log.info("Get last {} temperature for sensorId {}", count, sensorId);
         PageRequest pageRequest = PageRequest.of(0, count);
         return temperatureRepository.findAllBySensorIdOrderByTimeDesc(sensorId, pageRequest)
@@ -58,7 +61,6 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
-    @Cacheable(value = "temperatureData")
     public List<TemperatureDataDto> getLastTemperatureForAllSensors(int quantity) {
         PageRequest pageable = PageRequest.of(0, quantity);
         return temperatureRepository.findAllByOrderByTimeDesc(pageable).stream()
@@ -67,7 +69,7 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
-    @Cacheable(value = "temperatureData")
+    @Cacheable(value = "temperatureDataList",key = "#groupId")
     public List<TemperatureDataDto> getLastTemperatureForGroup(String groupId) {
 
         List<SensorInfoDto> sensors = sensorService.getSensorsByGroupName(groupId);

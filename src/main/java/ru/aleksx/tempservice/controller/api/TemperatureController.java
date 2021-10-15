@@ -25,14 +25,14 @@ public class TemperatureController {
     @GetMapping("/temperature/sensor/{sensorId}")
     public TemperatureDataDto getTempForSensor(@PathVariable String sensorId) {
 
-        return temperatureService.getLastTemperature(sensorId).orElse(null);
+        return temperatureService.getLastTemperatures(sensorId);
     }
 
 
     @GetMapping("/temperature/sensor/{sensorId}/quantity/{quantity}")
     public List<TemperatureDataDto> getTempForSensorQuantity(@PathVariable String sensorId,
                                                              @PathVariable int quantity) {
-        return temperatureService.getLastTemperature(sensorId, quantity);
+        return temperatureService.getLastTemperatures(sensorId, quantity);
     }
 
     @GetMapping("/temperature/group/{groupId}")

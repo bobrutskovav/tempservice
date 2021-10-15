@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.SimpleKey;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import ru.aleksx.tempservice.controller.dto.TemperatureDataDto;
 
 import javax.cache.CacheManager;
 import javax.cache.Caching;
@@ -28,14 +29,20 @@ public class CacheConfig {
     @Bean
     public CacheManager jCacheManagerCustomizer() {
 
-        CacheConfiguration<SimpleKey, List> cacheConfiguration =
-                newCacheConfigurationBuilder(SimpleKey.class, List.class, heap(100).offheap(20, MB))
+        CacheConfiguration<String, List> tempListCacheConfiguration =
+                newCacheConfigurationBuilder(String.class, List.class, heap(100).offheap(20, MB))
+                        .withExpiry(ExpiryPolicyBuilder.timeToLiveExpiration(Duration.ofMinutes(1L)))
+                        .build();
+
+        CacheConfiguration<String, TemperatureDataDto> temperatureCacheConfiguration =
+                newCacheConfigurationBuilder(String.class, TemperatureDataDto.class, heap(100).offheap(20, MB))
                         .withExpiry(ExpiryPolicyBuilder.timeToLiveExpiration(Duration.ofMinutes(1L)))
                         .build();
 
 
         Map<String, CacheConfiguration<?, ?>> caches = new HashMap<>();
-        caches.put("temperatureData", cacheConfiguration);
+        caches.put("temperatureDataList", tempListCacheConfiguration);
+        caches.put("temperatureData",temperatureCacheConfiguration);
 
 
         EhcacheCachingProvider provider = (EhcacheCachingProvider) Caching.getCachingProvider("org.ehcache.jsr107.EhcacheCachingProvider");
