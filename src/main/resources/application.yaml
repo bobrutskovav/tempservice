@@ -4,6 +4,8 @@ mqtt:
     port: 1883
   clientname: "serverclient"
   username: "server"
+  topic:
+    temperature: "greenhouse/temperature"
 logging:
   level:
     org.springframework.data.mongodb.core.MongoTemplate: DEBUG

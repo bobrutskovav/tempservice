@@ -8,6 +8,14 @@ import org.springframework.context.annotation.Configuration;
 public class MqttSettings {
 
 
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
     public static class Broker {
         private String host;
         private int port;
@@ -29,6 +37,19 @@ public class MqttSettings {
         }
     }
 
+
+    public static class Topic {
+        private String temperature;
+
+        public String getTemperature() {
+            return temperature;
+        }
+
+        public void setTemperature(String temperature) {
+            this.temperature = temperature;
+        }
+    }
+
     private Broker broker;
 
     private String clientName;
@@ -36,6 +57,8 @@ public class MqttSettings {
     private String password;
 
     private String username;
+
+    private Topic topic;
 
     public String getClientName() {
         return clientName;
