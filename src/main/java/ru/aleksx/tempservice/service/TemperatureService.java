@@ -9,9 +9,9 @@ import java.util.Optional;
 public interface TemperatureService {
 
 
-    Optional<TemperatureDataDto> getLastTemperature(String sensorId);
+    TemperatureDataDto getLastTemperatures(String sensorId);
 
-    List<TemperatureDataDto> getLastTemperature(String sensorId, int quantity);
+    List<TemperatureDataDto> getLastTemperatures(String sensorId, int quantity);
 
     List<TemperatureDataDto> getLastTemperatureForAllSensors(int quantity);
 

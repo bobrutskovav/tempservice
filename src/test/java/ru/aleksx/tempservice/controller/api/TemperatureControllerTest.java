@@ -1,6 +1,7 @@
 package ru.aleksx.tempservice.controller.api;
 
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -58,7 +59,7 @@ public class TemperatureControllerTest {
     }
 
     @Test
-    void getTemp() throws Exception {
+    void getTemperature() throws Exception {
 
         String randomSensorUuid = UUID.randomUUID().toString();
 
@@ -76,12 +77,12 @@ public class TemperatureControllerTest {
                 .andReturn();
         String content = result.getResponse().getContentAsString();
         TemperatureDataDto temperatureDataDto = objectMapper.readValue(content, TemperatureDataDto.class);
-        Assert.assertEquals(temperatureDataDto.getTemperature(), "28.2");
+        Assertions.assertEquals(temperatureDataDto.getTemperature(), "28.2");
     }
 
 
     @Test
-    void testGetTempNForSensor() throws Exception {
+    void testGetTemperatureNForSensor() throws Exception {
         String randomSensorUuid = UUID.randomUUID().toString();
 
         TemperatureData temperatureData = new TemperatureData();
@@ -110,14 +111,14 @@ public class TemperatureControllerTest {
                 .andExpect(status().is(200))
                 .andReturn();
         String content = result.getResponse().getContentAsString();
-        ArrayList<TemperatureDataDto> tempDatas = objectMapper.readValue(content, ArrayList.class);
-        Assert.assertEquals(tempDatas.size(), 3);
+        List<TemperatureDataDto> tempDatas = objectMapper.readValue(content, ArrayList.class);
+        Assertions.assertEquals(tempDatas.size(), 3);
 
     }
 
 
     @Test
-    void testGetTempNForSensorCached() throws Exception {
+    void testGetTemperatureNForSensorCached() throws Exception {
         String randomSensorUuid = UUID.randomUUID().toString();
 
         TemperatureData temperatureData = new TemperatureData();
@@ -154,8 +155,8 @@ public class TemperatureControllerTest {
                 .andReturn();
         verify(temperatureRepository, times(1)).findAllBySensorIdOrderByTimeDesc(randomSensorUuid, pageRequest);
         String content = result2.getResponse().getContentAsString();
-        ArrayList<TemperatureDataDto> tempDatas = objectMapper.readValue(content, ArrayList.class);
-        Assert.assertEquals(tempDatas.size(), 3);
+        List<TemperatureDataDto> tempDatas = objectMapper.readValue(content, ArrayList.class);
+        Assertions.assertEquals(tempDatas.size(), 3);
 
     }
 
