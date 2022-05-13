@@ -6,7 +6,7 @@ import org.apache.commons.validator.routines.InetAddressValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import ru.aleksx.tempservice.controller.dto.SensorInfoDto;
-import ru.aleksx.tempservice.model.Sensor;
+import ru.aleksx.tempservice.model.Device;
 import ru.aleksx.tempservice.repository.SensorRepository;
 
 import java.util.List;
@@ -63,15 +63,15 @@ public class SensorServiceImpl implements SensorService {
 
         validateIp(ip);
         checkIpIsAlreadyUsed(ip);
-        Sensor sensor = new Sensor();
-        sensor.setGroupName(sensorGroupName);
-        sensor.setIp(ip);
-        return mapToDto(sensorRepository.save(sensor));
+        Device device = new Device();
+        device.setGroupName(sensorGroupName);
+        device.setIp(ip);
+        return mapToDto(sensorRepository.save(device));
     }
 
 
-    private SensorInfoDto mapToDto(Sensor sensor) {
-        return modelMapper.map(sensor, SensorInfoDto.class);
+    private SensorInfoDto mapToDto(Device device) {
+        return modelMapper.map(device, SensorInfoDto.class);
     }
 
 
@@ -84,7 +84,7 @@ public class SensorServiceImpl implements SensorService {
 
     private void checkIpIsAlreadyUsed(String ip) {
         log.debug("Check ip is already used {}", ip);
-        Optional<Sensor> found = sensorRepository.findFirstByIp(ip);
+        Optional<Device> found = sensorRepository.findFirstByIp(ip);
         if (found.isPresent()) {
             throw new IllegalArgumentException(String.format("IP Address is used by Sensor %s", found.get()));
         }
